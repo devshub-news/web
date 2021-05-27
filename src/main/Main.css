@@ -1,0 +1,37 @@
+.main-container {
+    width: 100%;
+    height: 100vh;
+    background-color: #ffffff8b;
+    overflow: auto;
+    flex-grow: 1;
+}
+
+.appbar {
+    display: flex;
+}
+
+.main-container a {
+    text-decoration: none !important;
+}
+
+.main-title {
+    flex-grow: 1;
+    font-size: 28px !important;
+    text-align: start;
+    font-family: sans-serif !important;
+    color: white !important;
+}
+
+.toolbar-icon {
+    width: 45px;
+    height: 45px;
+    margin-right: 10px;
+    fill: white;
+}
+
+.main-notications-menu-item {
+    display: flex !important;
+    flex-direction: row;
+    justify-content: space-between !important;
+    padding: 10px 16px !important
+}
