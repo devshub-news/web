@@ -1,0 +1,45 @@
+
+.news-container {
+    text-align: start;
+    width: 100%;
+}
+
+.news-banner-container {
+    width: 100%;
+    height: 500px;
+    position: relative;
+}
+
+.news-content {
+    padding: 20px;
+}
+
+.news-title {
+    color: white;
+    font-weight: 500 !important;
+}
+
+.news-items-container {
+    display: flex;
+    overflow: auto;
+    max-width: 100%;
+}
+
+.news-item {
+    max-width: 445px;
+    min-width: 445px;
+    margin: 15px;
+}
+
+@media screen and (max-width: 768px) {
+    .news-item {
+        max-width: 100%;
+        min-width: 300px;
+        margin: 10px;
+    }
+}
+
+
+.MuiChip-root {
+    margin: 2px 4px;
+}

@@ -1,9 +1,9 @@
 import NotificationsAPI from "./notificationsAPI";
 
+if(navigator.serviceWorker)
+    navigator.serviceWorker.register('./service-worker.js')
 
-navigator.serviceWorker.register('./service-worker.js')
-
-class NotificationManager {
+class NotificationsManager {
 
     static get subscription() {
         return new Promise(async (resolve) => {
@@ -72,7 +72,7 @@ class NotificationManager {
     }
 
     static async askNotificationPermission() {
-        const browserSupport = NotificationManager.checkBrowserSupport()
+        const browserSupport = NotificationsManager.checkBrowserSupport()
         if (browserSupport.status === 0) {
             return browserSupport
         }
@@ -94,7 +94,7 @@ class NotificationManager {
 
     static async subscribe(categories) {
 
-        const permisson = await NotificationManager.askNotificationPermission()
+        const permisson = await NotificationsManager.askNotificationPermission()
         if (permisson.status === 0) {
             return permisson
         }
@@ -137,7 +137,7 @@ class NotificationManager {
     }
 
     static async unsubscribe() {
-        if (await NotificationManager.subscription === undefined) {
+        if (await NotificationsManager.subscription === undefined) {
             return
         }
         const serviceWorkerRegistration = await navigator.serviceWorker.ready
@@ -150,4 +150,4 @@ class NotificationManager {
     }
 }
 
-export default NotificationManager
+export default NotificationsManager

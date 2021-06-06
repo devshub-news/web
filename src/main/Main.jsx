@@ -1,4 +1,4 @@
-import { AppBar, IconButton, Menu, MenuItem, Paper, Switch, Toolbar, Typography } from "@material-ui/core"
+import { AppBar, IconButton, Menu, MenuItem, Switch, Toolbar, Typography } from "@material-ui/core"
 import React, { useEffect } from "react";
 import NotificationsIcon from '@material-ui/icons/Notifications';
 
@@ -6,6 +6,7 @@ import './Main.css'
 import { Redirect, Route, HashRouter as Router, Switch as RouterSwitch } from 'react-router-dom';
 import NotificationsAPI from "../common/notificationsAPI";
 import NotificationsManager from "../common/notificationsManager";
+import News from "../news/News";
 
 const Main = () => {
 
@@ -73,7 +74,7 @@ const Main = () => {
     return <div className="main-container">
         <AppBar position="static" className="appbar">
             <Toolbar style={{ display: "flex", justifyContent: "space-between" }}>
-                <a href="#/games" style={{ display: "flex" }}>
+                <a href="#/" style={{ display: "flex" }}>
                     <img src="assets/images/devshub-white.png" alt="" className="toolbar-icon" srcSet="assets/images/devshub-white.svg" />
                     <Typography variant="h6" className="main-title" >
                         DevsHub
@@ -138,13 +139,11 @@ const Main = () => {
                 </div>
             </Toolbar>
         </AppBar>
-        <div style={{ display: "flex", height: "min-content", backgroundColor: "#f5f5f5", paddingBottom: '50px' }}>
-
-            <Paper style={{ width: "95%", margin: "10px auto", height: "min-content" }} elevation={3}>
+        <div style={{ display: "flex", height: "min-content", backgroundColor: "inherit", paddingBottom: '50px' }}>
                 <Router>
                     <RouterSwitch>
                         <Route path="/" exact={true}>
-                            Todas
+                            <News></News>
                         </Route>
                         <Route path="/topic/:category" exact={true}>
                             De una categoría
@@ -155,7 +154,6 @@ const Main = () => {
                         <Redirect path="" to="/" />
                     </RouterSwitch>
                 </Router>
-            </Paper>
         </div>
     </div>
 }
