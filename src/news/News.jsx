@@ -1,7 +1,6 @@
 import './News.css'
 
 import NewsBanner from '../news-banner/NewsBanner';
-import NewItem from './NewItem';
 import NewsList from './NewsList';
 
 const News = () => {
