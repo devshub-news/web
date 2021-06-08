@@ -10,7 +10,7 @@ const NewsList = (props) => {
     const [latestTopicNews, setLatestTopicNews] = useState([])
 
     useEffect(() => {
-        let isMounted = true;               // note mutable flag
+        let isMounted = true;
         NewsAPI.getNews(props.topic, 8).then(response => {
           if (isMounted) {
             if(response !== undefined){
@@ -19,9 +19,9 @@ const NewsList = (props) => {
                 })
                 setLatestTopicNews(response.data)
             }
-          }    // add conditional check
+          }
         })
-        return () => { isMounted = false }; // use cleanup to toggle value, if unmounted
+        return () => { isMounted = false };
       }, [props.topic]);  
 
     return (

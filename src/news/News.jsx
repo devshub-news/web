@@ -6,12 +6,12 @@ import { useEffect, useState } from 'react';
 import NewsAPI from './NewsAPI';
 import { categories, getChips } from "../common/categories";
 
-const News = (props) => {
+const News = () => {
 
     const [latestNews, setLatestNews] = useState([])
 
     useEffect(() => {
-        let isMounted = true;               // note mutable flag
+        let isMounted = true;
         NewsAPI.getNews(undefined, 6).then(response => {
           if (isMounted) {
             if(response !== undefined){
@@ -20,9 +20,9 @@ const News = (props) => {
                 })
                 setLatestNews(response.data)
             }
-          }    // add conditional check
+          }
         })
-        return () => { isMounted = false }; // use cleanup to toggle value, if unmounted
+        return () => { isMounted = false };
       }, []);
 
     return <div className="news-container">
