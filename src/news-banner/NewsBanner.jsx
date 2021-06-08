@@ -1,4 +1,3 @@
-import { Chip } from '@material-ui/core';
 import BannerAnim from 'rc-banner-anim';
 import QueueAnim from 'rc-queue-anim';
 import * as timeago from 'timeago.js';
@@ -23,19 +22,18 @@ const NewsBanner = (props) => {
                         key="bg"
                         className="bg"
                         style={{
-                            backgroundImage: `url(${newItem.image})`,
+                            backgroundImage: `url(${newItem.image || "https://i.stack.imgur.com/y9DpT.jpg"})`,
                             backgroundSize: 'cover',
                             backgroundPosition: 'center',
                         }}
                     />
                     <a href={newItem.url}>
                         <QueueAnim name="QueueAnim" style={{ padding: '20px', color: 'white' }}>
+                            <p key="p">{newItem.from} - {timeago.format(newItem.date)}</p>
                             <h1 key="h1">{newItem.title}</h1>
                             <div key="div" style={{ marginTop: "10px", display: "flex", flexWrap: "wrap" }} >
-                                <Chip label="Web Development" color="primary" />
-                                <Chip label="Career" />
+                                {newItem.chips}
                             </div>
-                            <p key="p">{newItem.from} - {timeago.format(newItem.date)}</p>
                         </QueueAnim>
                     </a>
                 </Element>

@@ -1,30 +1,45 @@
 import { Button } from "@material-ui/core"
+import { useEffect, useState } from "react"
+import { getChips } from "../common/categories"
 import NewItem from "./NewItem"
+import NewsAPI from "./NewsAPI"
 
 
 const NewsList = (props) => {
 
-    return (
-        <>
-            {props.topic && (
-                <a style={{ display: "flex", justifyContent: "space-between" }} href={`/#/topic/${props.topic}`}>
-                    <h1 className="news-title">{props.title}</h1>
-                    <Button variant="contained" color="primary" style={{ margin: "auto 20px" }}>
-                        See more
-                    </Button>
-                </a>
-            )}
+    const [latestTopicNews, setLatestTopicNews] = useState([])
 
-            {props.topic? '': (
+    useEffect(() => {
+        let isMounted = true;               // note mutable flag
+        NewsAPI.getNews(props.topic, 8).then(response => {
+          if (isMounted) {
+            if(response !== undefined){
+                response.data.forEach(newItem => {
+                    newItem.chips = getChips(newItem.classification)
+                })
+                setLatestTopicNews(response.data)
+            }
+          }    // add conditional check
+        })
+        return () => { isMounted = false }; // use cleanup to toggle value, if unmounted
+      }, [props.topic]);  
+
+    return (
+        <div style={{marginBottom: "40px"}}>
+            <a style={{ display: "flex", justifyContent: "space-between" }} href={`#/topic/${props.topic}`}>
                 <h1 className="news-title">{props.title}</h1>
-            )}
+                <Button variant="contained" color="primary" style={{ margin: "auto 20px" }}>
+                    See more
+                </Button>
+            </a>
 
             <div className="news-items-container">
-                {props.news.map(newItem => (
-                    <NewItem newItem={newItem}></NewItem>
+
+                {latestTopicNews.length > 0 && latestTopicNews.map(newItem => (
+                    <NewItem newItem={newItem} key={newItem.id}></NewItem>
                 ))}
             </div>
-        </>
+        </div>
     )
 }
 

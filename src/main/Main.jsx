@@ -7,6 +7,8 @@ import { Redirect, Route, HashRouter as Router, Switch as RouterSwitch } from 'r
 import NotificationsAPI from "../common/notificationsAPI";
 import NotificationsManager from "../common/notificationsManager";
 import News from "../news/News";
+import Topic from "../topic/Topic";
+import {categories as categoriesNames} from "../common/categories";
 
 const Main = () => {
 
@@ -92,48 +94,14 @@ const Main = () => {
                             open={Boolean(anchorEl)}
                             onClose={handleMenuClose}
                         >
-                            <MenuItem className="main-notications-menu-item">
-                                <span style={{ marginRight: "10px" }}>
-                                    Web Development
-                                </span>
-                                <Switch size="small" color="primary" checked={categories['web'] || false} onChange={(e) => toggleChecked(e, 'web')} />
-                            </MenuItem>
-                            <MenuItem className="main-notications-menu-item">
-                                <span style={{ marginRight: "10px" }}>
-                                    APIs and DBs
-                                </span>
-                                <Switch size="small" color="primary" checked={categories['apis'] || false} onChange={(e) => toggleChecked(e, 'apis')} />
-                            </MenuItem>
-                            <MenuItem className="main-notications-menu-item">
-                                <span style={{ marginRight: "10px" }}>
-                                    AI and Python
-                                </span>
-                                <Switch size="small" color="primary" checked={categories['py'] || false} onChange={(e) => toggleChecked(e, 'py')} />
-                            </MenuItem>
-                            <MenuItem className="main-notications-menu-item">
-                                <span style={{ marginRight: "10px" }}>
-                                    DevOps
-                                </span>
-                                <Switch size="small" color="primary" checked={categories['devops'] || false} onChange={(e) => toggleChecked(e, 'devops')} />
-                            </MenuItem>
-                            <MenuItem className="main-notications-menu-item">
-                                <span style={{ marginRight: "10px" }}>
-                                    Career
-                                </span>
-                                <Switch size="small" color="primary" checked={categories['career'] || false} onChange={(e) => toggleChecked(e, 'career')} />
-                            </MenuItem>
-                            <MenuItem className="main-notications-menu-item">
-                                <span style={{ marginRight: "10px" }} >
-                                    Hardware and OS
-                                </span>
-                                <Switch size="small" color="primary" checked={categories['so'] || false} onChange={(e) => toggleChecked(e, 'so')} />
-                            </MenuItem>
-                            <MenuItem className="main-notications-menu-item">
-                                <span style={{ marginRight: "10px" }}>
-                                    Others
-                                </span>
-                                <Switch size="small" color="primary" checked={categories['others'] || false} onChange={(e) => toggleChecked(e, 'others')} />
-                            </MenuItem>
+                            {Object.entries(categoriesNames).map(([category, categoryName]) => (
+                                <MenuItem className="main-notications-menu-item" key={category}>
+                                    <span style={{ marginRight: "10px" }}>
+                                        {categoryName}
+                                    </span>
+                                    <Switch size="small" color="primary" checked={categories[category] || false} onChange={(e) => toggleChecked(e, category)} />
+                                </MenuItem>
+                            ))}
                         </Menu>
                     </div>
                 </div>
@@ -145,8 +113,7 @@ const Main = () => {
                         <Route path="/" exact={true}>
                             <News></News>
                         </Route>
-                        <Route path="/topic/:category" exact={true}>
-                            De una categoría
+                        <Route path="/topic/:category" exact={true} component={Topic}>
                         </Route>
                         <Route path="/hub/:id" exact={true}>
                             Una específica

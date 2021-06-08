@@ -5,22 +5,22 @@ self.addEventListener('push', function(e) {
       data = JSON.parse(e.data.text());
     } else {
       data = {
-        title: "Nueva noticia",
-        body: "Revisa nuestra página",
-        icon: '/assets/images/devshub.png'
+        title: "New post",
+        body: "",
+        icon: 'assets/images/devshub.png'
       };
     }
   
     var options = {
       body: data.body,
-      icon: data.icon,
+      icon: data.icon || 'assets/images/devshub.png',
       vibrate: [100, 50, 100],
       data: {
         dateOfArrival: Date.now(),
         primaryKey: 1
       },
       actions: [
-        {action: 'explore', title: 'Ver post'}
+        {action: 'explore', title: 'See post'}
       ]
     };
     e.waitUntil(
