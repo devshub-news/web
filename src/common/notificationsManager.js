@@ -126,7 +126,7 @@ class NotificationsManager {
         let subscription = await serviceWorkerRegistration.pushManager.getSubscription()
 
         subscription = subscription.toJSON()
-        subscription.caregories = categories
+        subscription.categories = categories
 
         NotificationsAPI.sendSubscription(subscription)
 
